@@ -1,0 +1,8 @@
+pipi
+numpy
+requests 
+datetime
+beautifulsoup4
+progressbar
+IPython
+django-bootstrap4
