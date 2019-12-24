@@ -38,3 +38,26 @@ def home_view(request):
         'links':links,
     }
     return render(request,'home.html',context)
+#Ana Sayfa view dosyası
+def shift(request):
+    #Kategoriler
+    url="https://shiftdelete.net/"
+    links = []
+    titles = []
+    #Url'nin içerisindeki bütün html dosyasını indiriyoruz.
+    html = requests.get(url).text
+    soup = bs(html, "html.parser")
+    
+    #Yukarıdaki şemadada görüldüğü gibi bütün makaleler bu  element'in içerisinde yer alıyor.
+    #Bizde bütün makaleleri buradan tags adında bir değişkene topluyoruz.
+    tags = soup.find('div', attrs={'class':'left'})
+    #Sırayla bütün makalelere girip, href'in içerisindeki linki urls adlı listemize append ediyoruz.
+    for a in tags.find_all('a'):
+        links.append(a.text)
+    for a in tags.find_all('p'):
+        titles.append(a.text)
+    context={
+        'titles':titles,
+        'links':links,
+    }
+    return render(request,'shift.html',context)
